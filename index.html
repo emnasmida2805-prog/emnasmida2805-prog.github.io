@@ -1,0 +1,406 @@
+<title>Emna Smida — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Layout concept: a long single-column editorial scroll, like a lab notebook —
+     a wide ink margin on the left carries running labels/numbers, the content
+     column on the right carries prose, cards and data bars. */
+  :root{
+    --bg:#eef0ea;
+    --surface:#ffffff;
+    --surface-2:#e4e8df;
+    --ink:#1d2a21;
+    --muted:#5c6b5f;
+    --line:#c9d0c3;
+    --accent:#b1792b;
+    --accent-ink:#ffffff;
+    --accent-2:#3c7a72;
+    --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono:'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141a15; --surface:#1b231b; --surface-2:#222c21; --ink:#eef0ea;
+      --muted:#9fae9c; --line:#333f31; --accent:#dba24e; --accent-ink:#1a1206;
+      --accent-2:#6fb2a7; color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141a15; --surface:#1b231b; --surface-2:#222c21; --ink:#eef0ea;
+    --muted:#9fae9c; --line:#333f31; --accent:#dba24e; --accent-ink:#1a1206;
+    --accent-2:#6fb2a7; color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.6; padding-inline:20px;
+  }
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--font-display); text-wrap:balance; margin:0}
+  .mono{font-family:var(--font-mono)}
+  .wrap{max-width:860px; margin-inline:auto}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:5;
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:14px; background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(6px); border-bottom:1px solid var(--line);
+  }
+  .topbar .name{font-family:var(--font-display); font-weight:600; font-size:1.05rem}
+  .topbar nav{display:flex; gap:18px; font-size:.86rem}
+  .topbar nav a{text-decoration:none; color:var(--muted)}
+  .topbar nav a:hover{color:var(--accent)}
+  @media (max-width:520px){ .topbar nav{display:none} }
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:52px 36px; border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:.78rem; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent-2); margin-bottom:14px;
+  }
+  .hero h1{font-size:clamp(2.3rem, 6vw, 3.4rem); font-weight:600; letter-spacing:-.01em}
+  .hero .role{font-size:1.1rem; color:var(--muted); margin-top:10px; max-width:46ch}
+  .pitch{margin-top:20px; max-width:62ch; font-size:1.04rem}
+  .pitch strong{font-weight:600; color:var(--ink)}
+
+  .contact-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
+  .pill{
+    font-family:var(--font-mono); font-size:.8rem; padding:7px 12px;
+    border:1px solid var(--line); border-radius:999px; color:var(--muted);
+    background:var(--surface);
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding-block:40px; border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .section-head{
+    display:grid; grid-template-columns:52px 1fr; gap:10px; align-items:start;
+    margin-bottom:26px;
+  }
+  .section-num{font-family:var(--font-mono); color:var(--accent); font-size:.85rem; padding-top:6px}
+  .section-head h2{font-size:1.5rem; font-weight:600}
+  .section-sub{color:var(--muted); font-size:.95rem; margin-top:4px}
+  .section-body{margin-left:0}
+  @media (min-width:600px){ .section-body{margin-left:62px} }
+
+  /* ---------- about ---------- */
+  .about p{max-width:64ch; margin:0 0 14px}
+  .about p:last-child{margin-bottom:0}
+
+  /* ---------- timeline (experience + formation) ---------- */
+  .timeline{display:flex; flex-direction:column; gap:22px}
+  .tl-item{display:grid; grid-template-columns:1fr; gap:4px; padding-left:18px; border-left:2px solid var(--line); position:relative}
+  .tl-item::before{
+    content:""; position:absolute; left:-6px; top:4px; width:10px; height:10px;
+    border-radius:50%; background:var(--accent-2); border:2px solid var(--bg);
+  }
+  .tl-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; align-items:baseline}
+  .tl-title{font-weight:600; font-size:1.02rem}
+  .tl-date{font-family:var(--font-mono); font-size:.78rem; color:var(--muted); white-space:nowrap}
+  .tl-org{color:var(--accent-2); font-size:.88rem}
+  .tl-desc{color:var(--muted); font-size:.93rem; margin-top:2px; max-width:60ch}
+
+  /* ---------- projects ---------- */
+  .projects{display:flex; flex-direction:column; gap:18px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:22px 24px;
+  }
+  .card-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; align-items:baseline}
+  .card h3{font-size:1.18rem; font-weight:600}
+  .card-meta{font-family:var(--font-mono); font-size:.76rem; color:var(--muted)}
+  .card-desc{margin-top:10px; color:var(--ink); font-size:.95rem; max-width:62ch}
+  .card ul{margin:12px 0 0; padding-left:18px; color:var(--muted); font-size:.9rem}
+  .card ul li{margin-bottom:5px}
+  .card ul li::marker{color:var(--accent-2)}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:14px}
+  .tag{
+    font-family:var(--font-mono); font-size:.72rem; padding:4px 9px;
+    background:var(--surface-2); border-radius:6px; color:var(--ink);
+  }
+  .result{
+    margin-top:14px; padding-top:12px; border-top:1px dashed var(--line);
+    font-size:.88rem; color:var(--ink);
+  }
+  .result b{color:var(--accent-2); font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px}
+
+  .shots{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px}
+  .shots img{width:100%; display:block; border-radius:8px; border:1px solid var(--line)}
+  @media (max-width:560px){ .shots{grid-template-columns:1fr} }
+  .code-label{font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:16px 0 6px}
+  pre.code{
+    margin:0; padding:14px 16px; background:var(--surface-2); border:1px solid var(--line);
+    border-radius:8px; overflow-x:auto; font-family:var(--font-mono); font-size:.8rem; line-height:1.55; color:var(--ink);
+  }
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid; gap:26px}
+  .skill-group h4{
+    font-family:var(--font-mono); font-size:.76rem; text-transform:uppercase;
+    letter-spacing:.07em; color:var(--muted); margin:0 0 12px; font-weight:500;
+  }
+  .bars{display:flex; flex-direction:column; gap:10px}
+  .bar-row{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center}
+  .bar-label{font-size:.86rem}
+  .bar-track{height:7px; background:var(--surface-2); border-radius:999px; overflow:hidden}
+  .bar-fill{height:100%; background:linear-gradient(90deg, var(--accent-2), var(--accent)); border-radius:999px}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{
+    font-size:.85rem; padding:6px 12px; border:1px solid var(--line);
+    border-radius:999px; background:var(--surface);
+  }
+
+  footer{padding-block:40px 60px; text-align:center}
+  footer .sign{font-family:var(--font-display); font-size:1.1rem; margin-bottom:6px}
+  footer .muted{color:var(--muted); font-size:.86rem}
+</style>
+
+<div class="topbar wrap">
+  <span class="name">Emna Smida</span>
+  <nav>
+    <a href="#about">Profil</a>
+    <a href="#experience">Parcours</a>
+    <a href="#projects">Projets</a>
+    <a href="#skills">Compétences</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Data Analyst / Data Scientist — Alternance</div>
+    <h1>Emna Smida</h1>
+    <p class="role">Étudiante en cycle ingénieur Data Science &amp; IA à l'EFREI Paris, après une Licence MIASHS et le Magistère Ingénieur Économiste d'Aix‑Marseille Université.</p>
+    <p class="pitch">Je transforme des données brutes en <strong>décisions concrètes</strong> : du nettoyage d'un fichier jusqu'au modèle qui répond à une vraie question métier. Python, SQL et R au quotidien, une solide base en économétrie, et une première expérience en IA générative sur un chatbot déployé en conditions réelles.</p>
+    <div class="contact-row">
+      <span class="pill">emnasmida2805@gmail.com</span>
+      <span class="pill">06 16 10 34 56</span>
+      <span class="pill">Paris · mobile Île‑de‑France</span>
+      <span class="pill">Permis B</span>
+      <span class="pill">Disponible immédiatement</span>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="section-head">
+      <span class="section-num mono">01</span>
+      <div>
+        <h2>Profil</h2>
+        <div class="section-sub">Ce qui me définit, en deux temps</div>
+      </div>
+    </div>
+    <div class="section-body about">
+      <p>Je viens d'un double parcours : une licence en mathématiques et informatique, puis un magistère d'ingénieur économiste, qui m'a fait découvrir l'économétrie et l'analyse de données. C'est cette double culture — rigueur statistique et logique de code — que j'amène sur chaque projet.</p>
+      <p>Pendant mon stage de data scientist, j'ai conçu un chatbot IA de bout en bout : de la collecte des documents jusqu'au déploiement testé avec une équipe support. Aujourd'hui, je cherche une alternance où mettre cette rigueur au service de problématiques métier concrètes, idéalement dans un secteur technique et exigeant.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <div>
+        <h2>Parcours</h2>
+        <div class="section-sub">Expérience professionnelle &amp; formation</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-top">
+            <span class="tl-title">Stagiaire Data Scientist</span>
+            <span class="tl-date">mai – juil. 2026</span>
+          </div>
+          <div class="tl-org">Axia Solutions · Sousse, Tunisie</div>
+          <div class="tl-desc">Conception complète d'un chatbot IA d'assistance client, du pipeline RAG jusqu'au prototype testé avec l'équipe support.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-top">
+            <span class="tl-title">Employée polyvalente</span>
+            <span class="tl-date">mai 2024 – mars 2026</span>
+          </div>
+          <div class="tl-org">E.Leclerc · Marseille</div>
+          <div class="tl-desc">Emploi en parallèle des études — réception et contrôle des marchandises, travail en équipe, adaptation constante.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-top">
+            <span class="tl-title">Cycle ingénieur Data Science &amp; IA</span>
+            <span class="tl-date">2026 – 2029</span>
+          </div>
+          <div class="tl-org">EFREI Paris · alternance</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-top">
+            <span class="tl-title">Magistère Ingénieur Économiste</span>
+            <span class="tl-date">2025 – 2026</span>
+          </div>
+          <div class="tl-org">Aix‑Marseille Université</div>
+          <div class="tl-desc">Économie avancée, économétrie appliquée, data science.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-top">
+            <span class="tl-title">Licence MIASHS</span>
+            <span class="tl-date">2022 – 2026</span>
+          </div>
+          <div class="tl-org">Aix‑Marseille Université</div>
+          <div class="tl-desc">Mathématiques, statistiques &amp; probabilités, informatique.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <div>
+        <h2>Projets</h2>
+        <div class="section-sub">Trois projets, trois façons de traiter la donnée</div>
+      </div>
+    </div>
+    <div class="section-body projects">
+
+      <article class="card">
+        <div class="card-top">
+          <h3>Classification de sentiments — avis de films</h3>
+          <span class="card-meta">Axia Solutions · montée en compétence NLP</span>
+        </div>
+        <p class="card-desc">Avant de construire le chatbot, un vrai parcours de montée en compétence sur 160 000 avis de cinéma (dataset Allociné) : comprendre un texte, puis le classer comme positif ou négatif.</p>
+        <ul>
+          <li>Nettoyage et lemmatisation du texte (ramener chaque mot à sa forme de base), puis vectorisation en TF‑IDF</li>
+          <li>Modèle de référence par régression logistique : 91 % de précision, avec analyse des mots les plus associés aux avis positifs et négatifs</li>
+          <li>Gestion des classes déséquilibrées (SMOTE, pondération des classes) pour fiabiliser le modèle sur les cas rares</li>
+          <li>Passage à un modèle plus puissant par fine‑tuning de CamemBERT, puis déploiement via une API de prédiction (FastAPI) et suivi des expériences (MLflow)</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">TF-IDF</span><span class="tag">CamemBERT</span>
+          <span class="tag">scikit-learn</span><span class="tag">FastAPI</span><span class="tag">MLflow</span>
+        </div>
+        <div class="result"><b>Résultat</b>Une progression complète, du modèle simple et interprétable jusqu'au Transformer fine‑tuné, avec une API prête à l'emploi.</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>Chatbot IA — Assistant client</h3>
+          <span class="card-meta">Axia Solutions · stage de 2 mois</span>
+        </div>
+        <p class="card-desc">Un assistant conversationnel capable de répondre à partir de documents internes (PDF, Word), conçu et développé de bout en bout.</p>
+        <ul>
+          <li>Lecture automatique des documents, nettoyage puis découpage en petits morceaux de texte</li>
+          <li>Chaque morceau transformé en vecteur numérique (embeddings) et indexé avec FAISS pour une recherche rapide</li>
+          <li>À chaque question, récupération des passages les plus pertinents, puis génération de la réponse par le LLM Mistral 7B, avec consigne stricte de ne répondre qu'à partir du contexte fourni pour éviter les réponses inventées</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Mistral 7B</span><span class="tag">RAG</span>
+          <span class="tag">FAISS</span><span class="tag">Embeddings</span>
+        </div>
+        <div class="result"><b>Résultat</b>Chatbot fonctionnel, testé notamment sur mon propre rapport d'économétrie, avec des réponses correctement ancrées dans le document source.</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>Entre Nous — forum par émotions</h3>
+          <span class="card-meta">Projet de groupe · Licence 3</span>
+        </div>
+        <p class="card-desc">Une plateforme de bien-être qui s'adapte à l'humeur de l'utilisateur : des recommandations de films et de musiques selon qu'on se sent joyeux, triste ou stressé, un forum par thème, et des inspirations (vêtements, lieux) notées par étoiles.</p>
+        <ul>
+          <li>Système de comptes avec trois rôles (visiteur, membre, administrateur), chacun avec son propre menu et ses propres droits</li>
+          <li>Forum découpé par thème (Amitié, Amour, Libre), avec un contenu différent selon qu'on est connecté ou non</li>
+          <li>Pages de recommandations selon l'humeur, et système de notation par étoiles sur les inspirations, avec une moyenne recalculée à chaque nouveau vote</li>
+          <li>Base de données relationnelle à 5 tables (Utilisateurs, Forum, Conseils, Inspirations, Recommandations), interrogée avec PDO et des requêtes préparées pour éviter les injections SQL</li>
+          <li>Rôle dans l'équipe : développement du forum, du système de recommandations par humeur et de la page d'accueil</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">PHP</span><span class="tag">SQL · MariaDB</span><span class="tag">PDO</span><span class="tag">HTML/CSS</span><span class="tag">Bootstrap</span><span class="tag">XAMPP</span>
+        </div>
+        <div class="shots">
+          <img src="entrenous-inspi.png" alt="Page Inspirations hommes du site Entre Nous, avec notation par étoiles" loading="lazy">
+          <img src="entrenous-maps.png" alt="Page Lieux favoris du site Entre Nous, avec carte Google Maps intégrée" loading="lazy">
+        </div>
+        <div class="code-label">Extrait — requête préparée PDO (protection contre les injections SQL)</div>
+        <pre class="code"><code>$sql = "SELECT * FROM Utilisateurs WHERE Email = :Email AND Mdp = :Mdp";
+$resultat = $cnx-&gt;prepare($sql);
+$resultat-&gt;execute([
+    ":Email" =&gt; $_POST["Email"],
+    ":Mdp"   =&gt; $_POST["Mdp"]
+]);</code></pre>
+        <div class="result"><b>Résultat</b>Site fonctionnel livré en un semestre, avec gestion des rôles et interface d'administration dédiée.</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h3>Compétences numériques &amp; inégalités administratives</h3>
+          <span class="card-meta">Projet de groupe · Licence 3 · Enquête TIC 2024</span>
+        </div>
+        <p class="card-desc">Les compétences numériques réduisent-elles les inégalités administratives ? Une question d'actualité, traitée par régression logistique sur les données de l'enquête TIC.</p>
+        <ul>
+          <li>Sélection des variables pertinentes après plusieurs itérations de modélisation</li>
+          <li>Modèle logit retenu face à un MCO inadapté à une variable dépendante binaire</li>
+          <li>Rôle : exploration des données, modélisation statistique et visualisation</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">R</span><span class="tag">Régression logistique</span><span class="tag">Stats descriptives</span>
+        </div>
+        <div class="result"><b>Résultat</b>Les compétences numériques jouent un rôle déterminant dans l'autonomie des démarches administratives en ligne, indépendamment de l'âge, du revenu et du diplôme.</div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="section-num mono">04</span>
+      <div>
+        <h2>Compétences</h2>
+        <div class="section-sub">Outils &amp; langages au quotidien</div>
+      </div>
+    </div>
+    <div class="section-body skill-groups">
+
+      <div class="skill-group">
+        <h4>Langages &amp; data</h4>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label mono">Python</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">SQL</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">R</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">Économétrie</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">Stats &amp; proba</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">NLP / RAG</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+          <div class="bar-row"><span class="bar-label mono">PHP / web</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h4>Outils &amp; environnements</h4>
+        <div class="chip-row">
+          <span class="chip">Pandas / NumPy</span>
+          <span class="chip">Google Colab</span>
+          <span class="chip">Bases relationnelles</span>
+          <span class="chip">XAMPP</span>
+          <span class="chip">Power BI — en cours d'apprentissage</span>
+          <span class="chip">Logiciels d'économétrie</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h4>Langues</h4>
+        <div class="chip-row">
+          <span class="chip">Français — langue maternelle</span>
+          <span class="chip">Arabe — langue maternelle</span>
+          <span class="chip">Anglais — B2</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="sign">Travaillons ensemble.</div>
+    <div class="muted">emnasmida2805@gmail.com · 06 16 10 34 56 · Paris</div>
+  </footer>
+
+</div>
